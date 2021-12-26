@@ -5,6 +5,24 @@ VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirAstana.Web", "AirAstana.Web\AirAstana.Web.csproj", "{69ADA9D7-C977-4450-B184-A7DA60A2C349}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 Utils", "0 Utils", "{690F8CDE-AF1A-41FB-882C-D8D19C8974F7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 Entities", "1 Entities", "{41297A7C-6B0B-4AF9-A10F-450A9597AAAD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 Infrastructure.Interfaces", "2 Infrastructure.Interfaces", "{28755F25-A4DD-497B-9395-3539A78BBC00}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 Application", "3 Application", "{26366F57-1525-43A7-80DD-BF56A51AAE5D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 Infrastructure.Implementation", "4 Infrastructure.Implementation", "{D2019BA4-8733-43D6-8333-860E896719AA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{68AF6CC5-3CE6-401B-8914-40F2D2445ABB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{2967011C-FD9D-4B41-9778-B87599ACB4D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.Interfaces", "DataAccess.Interfaces\DataAccess.Interfaces.csproj", "{CB6CCD5B-38BB-43BC-9538-0A74DA00CC8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.MsSql", "DataAccess.MsSql\DataAccess.MsSql.csproj", "{0DF8EE03-6A09-4AD2-9838-CE243111A3B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +33,26 @@ Global
 		{69ADA9D7-C977-4450-B184-A7DA60A2C349}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69ADA9D7-C977-4450-B184-A7DA60A2C349}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69ADA9D7-C977-4450-B184-A7DA60A2C349}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2967011C-FD9D-4B41-9778-B87599ACB4D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2967011C-FD9D-4B41-9778-B87599ACB4D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2967011C-FD9D-4B41-9778-B87599ACB4D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2967011C-FD9D-4B41-9778-B87599ACB4D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB6CCD5B-38BB-43BC-9538-0A74DA00CC8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB6CCD5B-38BB-43BC-9538-0A74DA00CC8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB6CCD5B-38BB-43BC-9538-0A74DA00CC8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB6CCD5B-38BB-43BC-9538-0A74DA00CC8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DF8EE03-6A09-4AD2-9838-CE243111A3B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DF8EE03-6A09-4AD2-9838-CE243111A3B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DF8EE03-6A09-4AD2-9838-CE243111A3B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DF8EE03-6A09-4AD2-9838-CE243111A3B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2967011C-FD9D-4B41-9778-B87599ACB4D1} = {41297A7C-6B0B-4AF9-A10F-450A9597AAAD}
+		{CB6CCD5B-38BB-43BC-9538-0A74DA00CC8C} = {28755F25-A4DD-497B-9395-3539A78BBC00}
+		{0DF8EE03-6A09-4AD2-9838-CE243111A3B0} = {D2019BA4-8733-43D6-8333-860E896719AA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FF69AEFC-83C6-48BC-80FF-FDC1BA1494CF}
