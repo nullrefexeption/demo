@@ -1,4 +1,5 @@
 using DataAccess.MsSql;
+using DataAccess.MsSql.Seed;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -38,13 +39,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+
+var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+using (var scope = scopedFactory.CreateScope())
+{
+    var userManager = scope.ServiceProvider.GetService<UserManager<User>>();
+    var roleManager = scope.ServiceProvider.GetService<RoleManager<Role>>();
+    await DataSeed.SeedData(userManager, roleManager);
 }
 
 app.UseHttpsRedirection();
