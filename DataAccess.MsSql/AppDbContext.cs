@@ -43,7 +43,7 @@ namespace DataAccess.MsSql
                     new City { Id = 2, Name = "Нур-Султан"},
                     new City { Id = 3, Name = "Шымкент"},
                     new City { Id = 4, Name = "Караганда"},
-                    new City { Id=5, Name = "Уральск"}
+                    new City { Id = 5, Name = "Уральск"}
                 });
             });
 
