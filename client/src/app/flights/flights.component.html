@@ -1,0 +1,123 @@
+<p-table #flightsTable
+         (onLazyLoad)="loadFlights($event)"
+         [autoLayout]="true"
+         [value]="flights"
+         [lazy]="true"
+         [loading]="loadingTable"
+         [paginator]="true"
+         [rows]="10"
+         [sortOrder]="-1"
+         [totalRecords]="ordersCount"
+         xmlns="http://www.w3.org/1999/html">
+
+  <ng-template pTemplate="caption">
+    <div class="row">
+      <div class="col-6 align-self-center">
+        <p-button *appShowForRole="'Admin'" label="Add Flight" (onClick)="showAddFlightDialog()"></p-button>
+      </div>
+      <div class="col-6 text-right align-self-center">
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="header">
+    <tr class="text-center">
+      <th pSortableColumn="dcity">Departure City <p-sortIcon field="dcity"></p-sortIcon></th>
+      <th pSortableColumn="acity">Arrival City <p-sortIcon field="acity"></p-sortIcon></th>
+      <th pSortableColumn="dtime">Departure Time <p-sortIcon field="dtime"></p-sortIcon></th>
+      <th pSortableColumn="atime">Arrival Time <p-sortIcon field="atime"></p-sortIcon></th>
+      <th>Delayed</th>
+      <th *appShowForRole="'Admin, Moderator'"></th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>
+        <p-calendar appendTo="body" (onClearClick)="flightsTable.filter('', 'dDate', 'notUsed')"
+                    (onSelect)="onDepartureDateSelect($event)"
+                    [(ngModel)]="departureDateFilter"
+                    [inputStyle]="{'width': '11rem'}"
+                    [readonlyInput]="true" [showButtonBar]="true"
+                    dateFormat="dd.mm.yy"
+                    placeholder="Date filter" styleClass="ui-column-filter"></p-calendar>
+      </th>
+      <th>
+        <p-calendar appendTo="body"
+                    (onClearClick)="flightsTable.filter('', 'aDate', 'notUsed')"
+                      (onSelect)="onArrivalDateSelect($event)"
+                      [(ngModel)]="arrivalDateFilter"
+                      [inputStyle]="{'width': '11rem'}"
+                      [readonlyInput]="true" [showButtonBar]="true"
+                      dateFormat="dd.mm.yy"
+                      placeholder="Date filter" styleClass="ui-column-filter"></p-calendar>
+      </th>
+      <th></th>
+      <th *appShowForRole="'Admin, Moderator'"></th>
+    </tr>
+  </ng-template>
+
+  <ng-template let-flight pTemplate="body">
+    <tr>
+      <td>{{flight.departureCity.name}}</td>
+      <td>{{flight.arrivalCity.name}}</td>
+      <td>{{flight.departureTime | date:'medium'}}</td>
+      <td>{{flight.arrivalTime | date:'medium'}}</td>
+      <td>{{flight.delay}}</td>
+      <td *appShowForRole="'Admin, Moderator'">
+        <button *appShowForRole="'Admin'" pButton icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editFlight(flight)"></button>
+        <button *appShowForRole="'Admin'" pButton icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteFlight(flight)"></button>
+
+        <button *appShowForRole="'Moderator'" pButton icon="pi pi-cog" class="p-button-rounded p-button-success" (click)="showChangeDelayDialog(flight)"></button>
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td [attr.colspan]="5" class="text-center">
+        No Data
+      </td>
+    </tr>
+  </ng-template>
+
+</p-table>
+
+<p-dialog [(visible)]="displayChangeDelayDialog" [header]="'Change Delay'">
+  <div class="row">
+    <label class="col-12">Delay</label>
+    <p-inputNumber [(ngModel)]="flight.delay"></p-inputNumber>
+  </div>
+
+  <button *ngIf="!isEdit" type="button" pButton (click)="changeDelay()">Change</button>
+</p-dialog>
+
+<p-dialog [(visible)]="displayDialog" [header]="'Flight Details'">
+
+  <div class="row">
+    <label class="col-12">Departure City</label>
+    <p-dropdown appendTo="body" class="col-12" [options]="cities" [(ngModel)]="flight.departureCity" optionLabel="name"></p-dropdown>
+  </div>
+
+  <div class="row">
+    <label class="col-12">Departure Time</label>
+    <p-calendar [(ngModel)]="flight.departureTime" [showTime]="true" inputId="time" appendTo="body"></p-calendar>
+  </div>
+
+  <div class="row">
+    <label class="col-12">Arrival City</label>
+    <p-dropdown appendTo="body" class="col-12" [options]="cities" [(ngModel)]="flight.arrivalCity" optionLabel="name"></p-dropdown>
+  </div>
+
+  <div class="row">
+    <label class="col-12">Arrival Time</label>
+    <p-calendar [(ngModel)]="flight.arrivalTime" [showTime]="true" inputId="time" appendTo="body"></p-calendar>
+  </div>
+
+  <div *ngIf="isEdit" class="row">
+    <label for="delay" class="col-12">Delay</label>
+    <p-inputNumber id="delay" [(ngModel)]="flight.delay"></p-inputNumber>
+  </div>
+
+  <button *ngIf="isEdit" type="button" pButton (click)="saveFlight()">Save</button>
+  <button *ngIf="!isEdit" type="button" pButton (click)="addFlight()">Add</button>
+</p-dialog>

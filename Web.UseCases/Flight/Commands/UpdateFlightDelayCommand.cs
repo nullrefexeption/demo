@@ -31,11 +31,9 @@ namespace Web.UseCases.Flight.Commands
                 return new Response().SetStatusError().AddErrorMessage("Flight Not Found");
             }
 
-            var updatedFlight = _mapper.Map<Models.Models.Flight>(request.UpdateFlightDelayDto);
+            flightFromDb.Delay = request.UpdateFlightDelayDto.Delay;
 
-            _mapper.Map(updatedFlight, flightFromDb);
-
-            _dbContext.Flights.Update(updatedFlight);
+            _dbContext.Flights.Update(flightFromDb);
             await _dbContext.SaveChangesAsync(cancellationToken);
 
             return new Response().SetStatusSuccess().AddSuccessMessage("Flight Updated");

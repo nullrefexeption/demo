@@ -2,12 +2,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Models.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Web.UseCases.Flight.Dto;
 
 namespace Web.UseCases.Flight.Commands
 {

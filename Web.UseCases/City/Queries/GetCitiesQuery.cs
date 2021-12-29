@@ -7,11 +7,11 @@ using Web.UseCases.City.Dto;
 
 namespace Web.UseCases.City.Queries
 {
-    public class GetCitiesQuery : IRequest<Response<List<CityDto>>>
+    public class GetCitiesQuery : IRequest<List<CityDto>>
     {
     }
 
-    public class MyClGetCitiesQueryHandler : IRequestHandler<GetCitiesQuery, Response<List<CityDto>>>
+    public class MyClGetCitiesQueryHandler : IRequestHandler<GetCitiesQuery, List<CityDto>>
     {
         private readonly IDbContext _dbContext;
         private readonly IMapper _mapper;
@@ -23,17 +23,12 @@ namespace Web.UseCases.City.Queries
             _mapper = mapper;
         }
 
-        public async Task<Response<List<CityDto>>> Handle(GetCitiesQuery request, CancellationToken cancellationToken)
+        public async Task<List<CityDto>> Handle(GetCitiesQuery request, CancellationToken cancellationToken)
         {
-            var response = new Response<List<CityDto>>();
-
             var cities = await _dbContext.Cities.ToListAsync(cancellationToken: cancellationToken);
             var cityDtos = _mapper.Map<List<CityDto>>(cities);
 
-            response.Data = cityDtos;
-            response.SetStatusSuccess();
-
-            return response;
+            return cityDtos;
         }
     }
 }

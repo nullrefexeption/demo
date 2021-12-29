@@ -1,0 +1,29 @@
+:host ::ng-deep .ui-calendar .ui-datepicker {
+  min-width: 25em;
+}
+
+:host ::ng-deep .ui-paginator .ui-dropdown {
+  float: right;
+}
+
+:host ::ng-deep .ui-paginator .ui-paginator-current {
+  float: left;
+}
+
+:host ::ng-deep .ui-paginator {
+  padding: 0.7em;
+}
+
+:host ::ng-deep .ui-widget td > p {
+  margin-bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  width: max-content;
+  padding-left: .5em;
+  padding-right: .5em;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
+}

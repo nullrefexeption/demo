@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.1">
@@ -17,8 +19,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Application.Implementation\Application.Implementation.csproj" />
+    <ProjectReference Include="..\Application.Interfaces\Application.Interfaces.csproj" />
     <ProjectReference Include="..\DataAccess.MsSql\DataAccess.MsSql.csproj" />
     <ProjectReference Include="..\Models\Entities.csproj" />
+    <ProjectReference Include="..\Web.Controllers\Web.Controllers.csproj" />
+    <ProjectReference Include="..\Web.UseCases\Web.UseCases.csproj" />
+    <ProjectReference Include="..\WebServices.Implementation\WebServices.Implementation.csproj" />
+    <ProjectReference Include="..\WebServices\WebServices.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

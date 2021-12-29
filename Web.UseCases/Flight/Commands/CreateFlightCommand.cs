@@ -32,7 +32,7 @@ namespace Web.UseCases.Flight.Commands
 
             response.Data = _mapper.Map<FlightDto>(flight);
 
-            return response.AddSuccessMessage("Flight Created");
+            return response.SetStatusSuccess().AddSuccessMessage("Flight Created");
         }
     }
 }

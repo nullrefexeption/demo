@@ -10,5 +10,6 @@ namespace Models.Models
     public class User : IdentityUser
     {
         public ICollection<UserFlight> UserFlights { get; set; }
+        public ICollection<UserRole> UserRoles { get; set; }
     }
 }

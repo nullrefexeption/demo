@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DataAccess.Interfaces;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Models.Models;
 using Web.UseCases.Flight.Dto;
 
@@ -24,17 +25,15 @@ namespace Web.UseCases.Flight.Commands
 
         public async Task<IResponse> Handle(UpdateFlightCommand request, CancellationToken cancellationToken)
         {
-            var flightFromDb = _dbContext.Flights.FirstOrDefault(x => x.Id == request.UpdateFlightDto.Id);
+            var flightFromDb = await _dbContext.Flights.FirstOrDefaultAsync(x => x.Id == request.UpdateFlightDto.Id, cancellationToken: cancellationToken);
             if (flightFromDb == null)
             {
                return new Response().SetStatusError().AddErrorMessage("Flight Not Found");
             }
 
-            var updatedFlight = _mapper.Map<Models.Models.Flight>(request.UpdateFlightDto);
+            _mapper.Map(request.UpdateFlightDto, flightFromDb);
 
-            _mapper.Map(updatedFlight, flightFromDb);
-
-            _dbContext.Flights.Update(updatedFlight);
+            _dbContext.Flights.Update(flightFromDb);
             await _dbContext.SaveChangesAsync(cancellationToken);
 
             return new Response().SetStatusSuccess().AddSuccessMessage("Flight Updated");

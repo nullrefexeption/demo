@@ -26,7 +26,7 @@ namespace Web.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserLoginDto loginDto)
         {
-            var user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == loginDto.Login);
+            var user = await _userManager.FindByEmailAsync(loginDto.Login);
 
             if (user == null)
             {

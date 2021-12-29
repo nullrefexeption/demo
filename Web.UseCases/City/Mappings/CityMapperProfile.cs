@@ -7,7 +7,7 @@ namespace Web.UseCases.City.Mappings
     {
         public CityMapperProfile()
         {
-            CreateMap<Models.Models.City, CityDto>();
+            CreateMap<Models.Models.City, CityDto>().ReverseMap();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models.Models;
 using Models.Models.Table;
@@ -17,12 +18,12 @@ namespace Web.Controllers
             _sender = sender;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<TableData<FlightDto>>> GetAll(TableParams parameters)
+        [HttpPost("list")]
+        public async Task<ActionResult<TableData<FlightDto>>> GetAll(TableParams? parameters)
         {
             var result = await _sender.Send(new GetFlightsQuery() { Params = parameters});
 
-            return HandleResult(result);
+            return Ok(result);
         }
 
         [HttpGet("{id:int}")]
@@ -34,6 +35,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Response<FlightDto>>> CreateFlight(CreateFlightDto createFlightDto)
         {
             var result = await _sender.Send(new CreateFlightCommand() { CreateFlightDto = createFlightDto });
@@ -41,6 +43,7 @@ namespace Web.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Response>> UpdateFlight(UpdateFlightDto updateFlightDto)
         {
             var result = await _sender.Send(new UpdateFlightCommand() { UpdateFlightDto = updateFlightDto });
@@ -48,12 +51,14 @@ namespace Web.Controllers
         }
 
         [HttpPost("changeDelay")]
+        [Authorize(Roles = "Admin, Moderator")]
         public async Task<ActionResult<Response>> ChangeFlightDelay(UpdateFlightDelayDto updateFlightDelayDto)
         {
             var result = await _sender.Send(new UpdateFlightDelayCommand() { UpdateFlightDelayDto = updateFlightDelayDto });
             return Ok(result);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteFlight(int id)
         {

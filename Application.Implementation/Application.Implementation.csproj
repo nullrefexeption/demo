@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.15" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Application.Interfaces\Application.Interfaces.csproj" />
     <ProjectReference Include="..\DataAccess.Interfaces\DataAccess.Interfaces.csproj" />
   </ItemGroup>

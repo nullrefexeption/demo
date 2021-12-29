@@ -1,4 +1,6 @@
-﻿namespace Web.UseCases.Flight.Dto
+﻿using Web.UseCases.City.Dto;
+
+namespace Web.UseCases.Flight.Dto
 {
     public class UpdateFlightDto
     {
@@ -7,8 +9,8 @@
         public DateTime DepartureTime { get; set; }
         public DateTime ArrivalTime { get; set; }
 
-        public int DepartureCityId { get; set; }
-        public int ArrivalCityId { get; set; }
+        public CityDto ArrivalCity { get; set; }
+        public CityDto DepartureCity { get; set; }
 
         public long Delay { get; set; }
     }

@@ -7,12 +7,12 @@ using Web.UseCases.Flight.Dto;
 
 namespace Web.UseCases.Flight.Queries
 {
-    public class GetFlightsQuery : IRequest<Response<TableData<FlightDto>>>
+    public class GetFlightsQuery : IRequest<TableData<FlightDto>>
     {
         public TableParams Params { get; set; }
     }
 
-    class GetFlightsQueryHandler : IRequestHandler<GetFlightsQuery, Response<TableData<FlightDto>>>
+    class GetFlightsQueryHandler : IRequestHandler<GetFlightsQuery, TableData<FlightDto>>
     {
         private readonly IMapper _mapper;
         private readonly IFlightsService _flightsService;
@@ -26,16 +26,16 @@ namespace Web.UseCases.Flight.Queries
             _flightsService = flightsService;
         }
 
-        public async Task<Response<TableData<FlightDto>>> Handle(GetFlightsQuery query, CancellationToken cancellationToken = default)
+        public async Task<TableData<FlightDto>> Handle(GetFlightsQuery query, CancellationToken cancellationToken = default)
         {
-            Response<TableData<FlightDto>> result = new Response<TableData<FlightDto>>();
-            
+            var tableData = new TableData<FlightDto>();
             var records = await _flightsService.GetAllFlights(query.Params);
 
-            result.Data.Data = _mapper.Map<List<FlightDto>>(records.Data);
-            result.Data.Count = records.Data.Count;
+            var dtos = _mapper.Map<List<FlightDto>>(records.Data);
+            tableData.Data = dtos;
+            tableData.Count = records.Count;
 
-            return result;
+            return tableData;
         }
     }
 }
