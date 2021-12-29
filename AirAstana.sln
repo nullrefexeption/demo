@@ -31,11 +31,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Interfaces", "A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Implementation", "Application.Implementation\Application.Implementation.csproj", "{151C5259-8F01-4866-9FC2-B5199D76CC32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServices.Interfaces", "WebServices\WebServices.Interfaces.csproj", "{75D2535A-DEF3-46ED-818C-F2F484F255A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebServices.Interfaces", "WebServices\WebServices.Interfaces.csproj", "{75D2535A-DEF3-46ED-818C-F2F484F255A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServices.Implementation", "WebServices.Implementation\WebServices.Implementation.csproj", "{B044DF06-527A-4125-95DD-7C9C75346AD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebServices.Implementation", "WebServices.Implementation\WebServices.Implementation.csproj", "{B044DF06-527A-4125-95DD-7C9C75346AD8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{CABEF622-B61B-4D0E-B371-B25D11C4F05C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AD215262-9396-463D-9514-E21B86E3AC49}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
