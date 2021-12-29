@@ -8,7 +8,8 @@ namespace DataAccess.MsSql.Seed
     {
         public static async Task SeedData(
             UserManager<User> userManager,
-            RoleManager<Role> roleManager)
+            RoleManager<Role> roleManager,
+            IDbContext dbContext)
         {
             string[] roleNames = { "Admin", "Moderator", "User" };
 
@@ -42,7 +43,29 @@ namespace DataAccess.MsSql.Seed
                 await userManager.AddToRoleAsync(users.FirstOrDefault(x => x.UserName == "Admin"), "Admin");
                 await userManager.AddToRoleAsync(users.FirstOrDefault(x => x.UserName == "Moderator"), "Moderator");
             }
-                
+
+            if (!dbContext.Flights.Any())
+            {
+                var flights = new Flight[] {
+                    new Flight
+                    {
+                        DepartureCityId = 1,
+                        ArrivalCityId = 2,
+                        DepartureTime = new DateTime(2021, 12, 29, 12, 22, 10),
+                        ArrivalTime = new DateTime(2021, 12, 29, 12, 33, 10)
+                    },
+                    new Flight
+                    {
+                        DepartureCityId = 3,
+                        ArrivalCityId = 4,
+                        DepartureTime = new DateTime(2021, 12, 29, 15, 22, 10),
+                        ArrivalTime = new DateTime(2021, 12, 29, 15, 44, 10)
+                    },
+                };
+
+                dbContext.Flights.AddRange(flights);
+                await dbContext.SaveChangesAsync();
+            }
         }
     }
 }

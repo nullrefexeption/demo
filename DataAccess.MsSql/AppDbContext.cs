@@ -84,6 +84,23 @@ namespace DataAccess.MsSql
                .WithMany(c => c.IncomingFlights)
                .HasForeignKey(c => c.ArrivalCityId)
                .OnDelete(DeleteBehavior.NoAction);
+
+               // x.HasData(
+               //    new Flight[] {
+               //     new Flight { 
+               //         DepartureCityId = 1, 
+               //         ArrivalCityId = 2, 
+               //         DepartureTime = new DateTime(2021, 12, 29, 12, 22, 10), 
+               //         ArrivalTime = new DateTime(2021, 12, 29, 12, 33, 10)
+               //     },
+               //     new Flight { 
+               //         DepartureCityId = 3, 
+               //         ArrivalCityId = 4, 
+               //         DepartureTime = new DateTime(2021, 12, 29, 15, 22, 10),
+               //         ArrivalTime = new DateTime(2021, 12, 29, 15, 44, 10)
+               //     },
+                    
+               //});
             });
 
             builder.Entity<UserFlight>(x =>

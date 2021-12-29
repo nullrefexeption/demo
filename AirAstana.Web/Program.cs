@@ -82,7 +82,8 @@ using (var scope = scopedFactory.CreateScope())
 {
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<Role>>();
-    await DataSeed.SeedData(userManager, roleManager);
+    var dbContext = scope.ServiceProvider.GetRequiredService<IDbContext>();
+    await DataSeed.SeedData(userManager, roleManager, dbContext);
 }
 
 app.UseExceptionHandlerMiddleware();
